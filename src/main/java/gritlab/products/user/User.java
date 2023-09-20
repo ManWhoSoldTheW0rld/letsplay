@@ -1,5 +1,10 @@
 package gritlab.products.user;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import jakarta.validation.constraints.Email;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Size;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 import lombok.Builder;
@@ -15,17 +20,21 @@ import java.util.Collection;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-public class User implements UserDetails  {
+public class User implements UserDetails {
     @Id
     private String id;
 
+    @NotBlank(message = "Name is required")
+    @Size(max = 255, min = 2, message = "Name cannot exceed 255 characters")
     private String name;
 
-    //todo @Email
+    @NotBlank(message = "Email is required")
+    @Email(message = "Invalid email format")
     private String email;
 
     private String password;
 
+    @NotNull(message = "Role is required")
     private Role role;
 
     @Override
