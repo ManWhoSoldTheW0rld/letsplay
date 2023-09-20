@@ -1,8 +1,11 @@
 package gritlab.products.controllers;
 
 import java.util.List;
+
+import com.fasterxml.jackson.annotation.JsonView;
 import gritlab.products.user.User;
 import gritlab.products.user.UserRepository;
+import gritlab.products.user.Views;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
@@ -23,6 +26,7 @@ public class UserController {
     private UserRepository userRepository;
 
     @GetMapping("/list")
+    @JsonView(Views.Public.class)
     public ResponseEntity<List<User>> findAll(Pageable pageable) {
         Page<User> page = userRepository.findAll(
                 PageRequest.of(

@@ -1,6 +1,6 @@
 package gritlab.products.user;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonView;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
@@ -22,19 +22,23 @@ import java.util.Collection;
 @AllArgsConstructor
 public class User implements UserDetails {
     @Id
+    @JsonView(Views.Public.class)
     private String id;
 
     @NotBlank(message = "Name is required")
     @Size(max = 255, min = 2, message = "Name cannot exceed 255 characters")
+    @JsonView(Views.Public.class)
     private String name;
 
     @NotBlank(message = "Email is required")
     @Email(message = "Invalid email format")
+    @JsonView(Views.Public.class)
     private String email;
 
     private String password;
 
     @NotNull(message = "Role is required")
+    @JsonView(Views.Public.class)
     private Role role;
 
     @Override
