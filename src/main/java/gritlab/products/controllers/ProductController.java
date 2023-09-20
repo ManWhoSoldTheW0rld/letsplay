@@ -5,6 +5,7 @@ import gritlab.products.product.ProductRepository;
 import gritlab.products.user.Role;
 import gritlab.products.user.User;
 import gritlab.products.user.UserRepository;
+import jakarta.annotation.security.PermitAll;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -33,6 +34,7 @@ public class ProductController {
     private UserRepository userRepository;
 
     @GetMapping("/list")
+    @PermitAll
     public ResponseEntity<List<Product>> findAll(Pageable pageable) {
         Page<Product> page = productRepository.findAll(
                 PageRequest.of(
