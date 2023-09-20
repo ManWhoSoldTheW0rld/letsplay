@@ -28,7 +28,7 @@ public class AuthenticationController {
 
     if (existingUser.isPresent()) {
       return ResponseEntity
-              .status(HttpStatus.CONFLICT)  // Use 409 Conflict status code
+              .status(HttpStatus.CONFLICT)
               .body("User with this email already exists");
     }
 

@@ -2,6 +2,7 @@ package gritlab.products.controllers;
 
 import gritlab.products.product.Product;
 import gritlab.products.product.ProductRepository;
+import gritlab.products.user.Role;
 import gritlab.products.user.User;
 import gritlab.products.user.UserRepository;
 import jakarta.validation.Valid;
@@ -73,7 +74,13 @@ public class ProductController {
             @CurrentSecurityContext(expression="authentication.name") String ownerEmail) {
 
         User owner = userRepository.findByEmail(ownerEmail).orElseThrow();
-        Product product = productRepository.findByUserIdAndId(owner.getId(), id).orElseThrow();
+
+        Product product;
+        if (owner.getRole() == Role.ADMIN) {
+            product = productRepository.findById(id).orElseThrow();
+        } else {
+            product = productRepository.findByUserIdAndId(owner.getId(), id).orElseThrow();
+        }
 
         Product updatedProduct = Product.builder()
                 .name(updatedData.getName())
@@ -94,14 +101,13 @@ public class ProductController {
 
         User owner = userRepository.findByEmail(ownerEmail).orElseThrow();
 
-        try {
+        if (owner.getRole() == Role.ADMIN) {
+            Product product = productRepository.findById(id).orElseThrow();
+            productRepository.delete(product);
+        } else {
             Product product = productRepository.findByUserIdAndId(owner.getId(), id).orElseThrow();
             productRepository.delete(product);
-
-        } catch (NoSuchElementException exception) {
-            return ResponseEntity.status(HttpStatus.FORBIDDEN).build();
         }
-
         return ResponseEntity.noContent().build();
     }
 }
