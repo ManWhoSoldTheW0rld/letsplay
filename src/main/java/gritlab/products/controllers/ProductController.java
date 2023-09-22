@@ -45,6 +45,14 @@ public class ProductController {
         return ResponseEntity.ok(page.getContent());
     }
 
+    @GetMapping("/item/{id}")
+    @PermitAll
+    public ResponseEntity<Product> findById(@PathVariable String id) {
+        Product product = productRepository.findById(id).orElseThrow();
+
+        return ResponseEntity.ok(product);
+    }
+
     @PostMapping
     private ResponseEntity<Void> createProduct( @Valid @RequestBody Product request,
                                                @CurrentSecurityContext(expression="authentication.name") String ownerEmail,
@@ -62,7 +70,7 @@ public class ProductController {
         var savedProduct = productRepository.save(product);
 
         URI locationOfNewProduct = ucb
-                .path("/api/v1/product/{id}")
+                .path("/api/v1/product/item/{id}")
                 .buildAndExpand(savedProduct.getId())
                 .toUri();
 

@@ -29,7 +29,8 @@ public class SecurityConfiguration {
               .authorizeHttpRequests(auth -> auth
                       .requestMatchers(
                               "/api/v1/auth/**",
-                              "/api/v1/product/list"
+                              "/api/v1/product/list",
+                              "/api/v1/product/item/*"
                       )
                       .permitAll()
                       .anyRequest().authenticated())

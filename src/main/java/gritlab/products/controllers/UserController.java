@@ -3,9 +3,11 @@ package gritlab.products.controllers;
 import java.util.List;
 
 import com.fasterxml.jackson.annotation.JsonView;
+import gritlab.products.product.Product;
 import gritlab.products.user.User;
 import gritlab.products.user.UserRepository;
 import gritlab.products.user.Views;
+import jakarta.annotation.security.PermitAll;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
@@ -35,6 +37,14 @@ public class UserController {
                         pageable.getSortOr(Sort.by(Sort.Direction.ASC, "name"))
                 ));
         return ResponseEntity.ok(page.getContent());
+    }
+
+    @GetMapping("/{id}")
+    @JsonView(Views.Public.class)
+    public ResponseEntity<User> findById(@PathVariable String id) {
+        User user = userRepository.findById(id).orElseThrow();
+
+        return ResponseEntity.ok(user);
     }
 
     @PutMapping("/{id}")
