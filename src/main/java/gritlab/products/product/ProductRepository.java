@@ -9,4 +9,6 @@ package gritlab.products.product;
 @RepositoryRestResource(collectionResourceRel = "products", path = "products")
 public interface ProductRepository extends MongoRepository<Product, String>, PagingAndSortingRepository<Product, String>  {
         Optional <Product> findByUserIdAndId(String userId, String id);
+
+        void deleteAllByUserId(String userId);
 }

@@ -4,6 +4,7 @@ import java.util.List;
 
 import com.fasterxml.jackson.annotation.JsonView;
 import gritlab.products.product.Product;
+import gritlab.products.product.ProductRepository;
 import gritlab.products.user.User;
 import gritlab.products.user.UserRepository;
 import gritlab.products.user.Views;
@@ -26,6 +27,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 public class UserController {
     @Autowired
     private UserRepository userRepository;
+
+    @Autowired
+    private ProductRepository productRepository;
 
     @GetMapping("/list")
     @JsonView(Views.Public.class)
@@ -70,7 +74,8 @@ public class UserController {
     ) {
         User user = userRepository.findById(id).orElseThrow();
 
-        userRepository.save(user);
+        productRepository.deleteAllByUserId(id);
+        userRepository.delete(user);
         return ResponseEntity.noContent().build();
     }
 }
