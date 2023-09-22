@@ -1,5 +1,6 @@
 package gritlab.products.config;
 
+import io.jsonwebtoken.ExpiredJwtException;
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
@@ -43,7 +44,17 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
     }
 
     jwt = authHeader.substring(7);
-    userEmail = jwtService.extractUsername(jwt);
+
+    try {
+      userEmail = jwtService.extractUsername(jwt);
+    } catch (ExpiredJwtException exception) {
+      // Set the HTTP status code for an error response (e.g., 401 for unauthorized)
+      response.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
+
+      // Write an error message to the response
+      response.getWriter().write(exception.getMessage());
+      return;
+    }
 
     if (userEmail != null) {
       UserDetails userDetails = this.userDetailsService.loadUserByUsername(userEmail);
