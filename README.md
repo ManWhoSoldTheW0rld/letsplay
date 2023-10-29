@@ -17,7 +17,7 @@ brew install <mongodb-community>
 brew services start <mongodb-community>
 
 #To stop service run
-brew services start <mongodb-community>
+brew services stop <mongodb-community>
 ```
 
 ## Getting Started
