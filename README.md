@@ -25,7 +25,7 @@ brew services start <mongodb-community>
 1. Clone this repository:
 
    ```shell
-   git clone todo gitea link
+   git clone git@github.com:ManWhoSoldTheW0rld/letsplay.git
 
 2. Change to the project directory:
 
