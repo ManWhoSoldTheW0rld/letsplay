@@ -1,6 +1,6 @@
 package gritlab.products.auth;
 
-import gritlab.products.user.Role;
+import gritlab.products.user.model.Role;
 import jakarta.validation.constraints.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;

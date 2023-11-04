@@ -2,7 +2,7 @@ package gritlab.products.user;
 
 import java.util.Optional;
 
-import gritlab.products.user.User;
+import gritlab.products.user.model.User;
 import org.springframework.data.mongodb.repository.MongoRepository;
 import org.springframework.data.rest.core.annotation.RepositoryRestResource;
 

@@ -1,5 +1,6 @@
-package gritlab.products.user;
+package gritlab.products.user.model;
 
+import gritlab.products.user.model.Permission;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;

@@ -1,4 +1,4 @@
-package gritlab.products.user;
+package gritlab.products.user.model;
 
 public class Views {
     public static class Public {}

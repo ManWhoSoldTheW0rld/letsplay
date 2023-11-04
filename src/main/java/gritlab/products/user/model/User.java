@@ -1,4 +1,4 @@
-package gritlab.products.user;
+package gritlab.products.user.model;
 
 import com.fasterxml.jackson.annotation.JsonView;
 import jakarta.validation.constraints.Email;

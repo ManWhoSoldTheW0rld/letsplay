@@ -1,7 +1,7 @@
 package gritlab.products.auth;
 
 import gritlab.products.config.JwtService;
-import gritlab.products.user.User;
+import gritlab.products.user.model.User;
 import gritlab.products.user.UserRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.authentication.AuthenticationManager;

@@ -1,4 +1,4 @@
-package gritlab.products.user;
+package gritlab.products.user.model;
 
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;

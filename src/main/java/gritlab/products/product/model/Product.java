@@ -1,4 +1,4 @@
-package gritlab.products.product;
+package gritlab.products.product.model;
 
 import jakarta.validation.constraints.DecimalMin;
 import lombok.AllArgsConstructor;
